@@ -1374,7 +1374,29 @@ const HomeContent = () => {
         await reload();
     }, [status, messages, setMessages, reload]);
 
-    // Add this type at the top with other interfaces
+    // Add these type definitions before the MessagePart type
+    interface TextUIPart {
+        type: 'text';
+        text: string;
+    }
+
+    interface ReasoningUIPart {
+        type: 'reasoning';
+        text: string;
+        toolInvocation?: ToolInvocation;
+    }
+
+    interface ToolInvocationUIPart {
+        type: 'tool';
+        toolInvocation: ToolInvocation;
+    }
+
+    interface SourceUIPart {
+        type: 'source';
+        text: string;
+        toolInvocation?: ToolInvocation;
+    }
+
     type MessagePart = TextUIPart | ReasoningUIPart | ToolInvocationUIPart | SourceUIPart;
 
     // Update the renderPart function signature
